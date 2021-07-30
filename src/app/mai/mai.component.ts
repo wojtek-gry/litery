@@ -1,5 +1,16 @@
 import {Component, Input, OnInit} from '@angular/core';
 
+export interface Answer {
+  id: number;
+  imageName: string;
+  isCorrect: boolean;
+}
+export interface Question {
+  id: number;
+  imageName: string;
+  options: Answer[];
+}
+
 @Component({
   selector: 'app-mai',
   templateUrl: './mai.component.html',
@@ -7,7 +18,7 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class MaiComponent implements OnInit {
   @Input()
-  name!: string;
+  question!: Question;
 
   constructor() { }
 

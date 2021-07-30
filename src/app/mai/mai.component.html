@@ -1,8 +1,9 @@
 <div style="width:800px; margin:0 auto;">
-  <img style="width:400px; height:400px;" src="assets/A.jpg">
+  <img style="width:400px; height:400px;" src="assets/{{question.imageName}}">
 </div>
 <br>
-<app-option [name]="name"></app-option>
-<img src="assets/ananas.jpg">
-<img src="assets/ananas.jpg">
+
+<div style="display:inline-block" *ngFor="let option of question.options">
+  <app-option [imageName]="option.imageName"></app-option>
+</div>
 <router-outlet></router-outlet>

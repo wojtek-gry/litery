@@ -1,4 +1,5 @@
 import {Component, Input} from '@angular/core';
+import {questionsList} from "./fullQuestions";
 
 @Component({
   selector: 'app-root',
@@ -7,5 +8,5 @@ import {Component, Input} from '@angular/core';
 })
 export class AppComponent {
   title = 'my-app';
-  name = 'ananas';
+  question = questionsList[0];
 }

@@ -7,7 +7,7 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class OptionComponent implements OnInit {
   @Input()
-  name!: string;
+  imageName!: string;
 
   constructor() { }
 

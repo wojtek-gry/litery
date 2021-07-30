@@ -10,12 +10,13 @@ import {Answer} from "./mai/mai.component";
 export class AppComponent {
   title = 'my-app';
   points = 0;
+  incorrect = 0;
   question = this.losuj2();
 
 
   losuj2() {
     let questionGenerator = new QuestionGenerator();
-    return  questionGenerator.sciezka();
+    return  questionGenerator.nextQuestion();
   }
 
   nextQuestion() {
@@ -26,6 +27,8 @@ export class AppComponent {
   choice(option: Answer) {
     if(option.isCorrect) {
       this.points++;
+    } else {
+      this.incorrect++;
     }
 
     this.nextQuestion();

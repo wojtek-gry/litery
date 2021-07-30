@@ -7,7 +7,7 @@ import {An, Answer, Qu} from "./mai/mai.component";
 export class QuestionGenerator {
   title = 'my-app';
 
-  sciezka() {
+  nextQuestion() {
     let files = fileList.slice();
     let {letter, an} = this.getCorrect(files);
 
@@ -15,7 +15,8 @@ export class QuestionGenerator {
     let option2 = this.getIncorrectAnswer(files2);
     let option3 = this.getIncorrectAnswer(files2);
 
-    let qu = new Qu(0, letter.imageName, [an, option2, option3]);
+    var options = this.shuffle([an, option2, option3]);
+    let qu = new Qu(0, letter.imageName, options);
 
     return qu;
   }
@@ -29,23 +30,26 @@ export class QuestionGenerator {
   }
 
   private extracted(files: File[], isCorrect: boolean) {
-    var ktora = this.losuj(files);
-    let letter = files[ktora];
-    console.log(letter);
-    let answerImage = letter.images[0];
+    let letter = this.answerLetter(files);
+    let answerImage = this.answerImage(letter.images);
     let an = new An(0, answerImage, isCorrect);
     return {letter, an};
   }
 
-  getA<T>(arr: Array<T>) {
-    let min = 0;
-    let max = arr.length;
-    var number = Math.random() * (max - min) + min;
-    console.log(number);
-    return Math.round(number);
+
+  private answerLetter(files: File[]) {
+    var ktora = this.losuj(files);
+    let letter = files[ktora];
+    return letter;
   }
 
-  losuj<T>(arr: Array<T>) {
+  private answerImage(images: string[]) {
+    let imageNames = images;
+    let answerImage = imageNames[this.losuj(imageNames)];
+    return answerImage;
+  }
+
+  private losuj<T>(arr: Array<T>) {
     let min = 0;
     let max = arr.length -1;
     var number = Math.random() * (max - min) + min;
@@ -53,13 +57,7 @@ export class QuestionGenerator {
     return Math.round(number);
   }
 
-  losuj2(min: number, max: number) {
-    var number = Math.random() * (max - min) + min;
-    console.log(number);
-    return Math.round(number);
-  }
-
-  removeItem<T>(arr: Array<T>, value: T): Array<T> {
+  private removeItem<T>(arr: Array<T>, value: T): Array<T> {
     const index = arr.indexOf(value);
     if (index > -1) {
       arr.splice(index, 1);
@@ -67,5 +65,22 @@ export class QuestionGenerator {
     return arr;
   }
 
+  private shuffle<T>(array: Array<T>) {
+    var currentIndex = array.length,  randomIndex;
+
+    // While there remain elements to shuffle...
+    while (0 !== currentIndex) {
+
+      // Pick a remaining element...
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
+
+      // And swap it with the current element.
+      [array[currentIndex], array[randomIndex]] = [
+        array[randomIndex], array[currentIndex]];
+    }
+
+    return array;
+  }
 
 }

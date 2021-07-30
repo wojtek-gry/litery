@@ -1,9 +1,14 @@
 <div style="width:800px; margin:0 auto;">
   <img style="width:400px; height:400px;" src="assets/{{question.imageName}}">
+
+  <div style="font-size: 15vw;  float: right;">
+    <font color="blue" > {{appComponent.points}}</font>
+
+  </div>
 </div>
 <br>
 
 <div style="display:inline-block" *ngFor="let option of question.options">
-  <app-option [imageName]="option.imageName"></app-option>
+  <app-option [option]="option" [main]="appComponent"></app-option>
 </div>
 <router-outlet></router-outlet>

@@ -1,4 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {Answer} from "../mai/mai.component";
+import {AppComponent} from "../app.component";
 
 @Component({
   selector: 'app-option',
@@ -7,7 +9,11 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class OptionComponent implements OnInit {
   @Input()
-  imageName!: string;
+  option!: Answer;
+
+  @Input()
+  main!: AppComponent;
+
 
   constructor() { }
 
